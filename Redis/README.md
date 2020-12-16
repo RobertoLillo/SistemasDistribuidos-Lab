@@ -8,7 +8,7 @@ $ sudo apt-get install docker.io
 
 $ sudo docker pull redis
 
-$ sudo docker run --name redis -d redis
+$ sudo docker run --name redis -d -p 6379:6379 redis
 ```
 
 ### Service commands
