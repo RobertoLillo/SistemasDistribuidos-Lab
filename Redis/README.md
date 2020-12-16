@@ -22,5 +22,5 @@ $ sudo docker exec -it redis sh
 
 # redis-cli
 
-# ping
+localhost:port> ping
 ```
