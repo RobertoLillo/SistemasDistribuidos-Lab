@@ -1,0 +1,9 @@
+confluent_kafka >= 1.4.2
+fastavro >= 0.23.5
+numpy >= 1.19.0
+lxml >= 4.5.1
+pandas >= 1.0.5
+requests >= 2.24.0
+SSEClient >= 0.0.26
+ujson >= 3.0.0
+wget >= 3.2
