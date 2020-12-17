@@ -7,3 +7,4 @@ requests >= 2.24.0
 SSEClient >= 0.0.26
 ujson >= 3.0.0
 wget >= 3.2
+cassandra-driver
