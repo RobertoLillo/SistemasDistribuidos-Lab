@@ -8,7 +8,7 @@ $ sudo apt-get install docker.io
 
 $ sudo docker pull cassandra:4.0
 
-$ sudo docker run -d --name cassandra -p 9842:9842 cassandra:4.0
+$ sudo docker run -d --name cassandra -p 9042:9042 cassandra:4.0
 ```
 
 ### Service commands
