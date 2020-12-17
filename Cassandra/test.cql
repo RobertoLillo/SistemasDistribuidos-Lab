@@ -6,11 +6,6 @@ Inside a keyspace you can have many tables.
 CREATE KEYSPACE IF NOT EXISTS test_keyspace WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'};
 
 /*
-DROP KEYSPACE
-*/
-DROP KEYSPACE test_keyspace;
-
-/*
 USE KEYSPACE
 */
 USE test_keyspace;
@@ -34,9 +29,30 @@ text_maker is not unique as id so a COMPOSITE KEY is needed, where the combinati
 
 PRIMARY KEY(PARTITION KEY, CLUSTERING COLUMN)
 */
-CREATE TABLE IF NOT EXISTS txst_table_by_maker (text_maker text, id int, PRIMARY KEY(text_maker, id));
+CREATE TABLE IF NOT EXISTS text_table_by_maker (text_maker text, id int, PRIMARY KEY(text_maker, id));
 
 /*
-DROP TABLE
+INSERT INTO TABLES
+
+You can leave blank spaces in the table.
 */
-DROP TABLE text_table_by_id;
+INSERT INTO text_table_by_id (id, test_text) VALUES (1, 'test_text_1');
+INSERT INTO text_table_by_id (id, test_text) VALUES (2, 'test_text_2');
+INSERT INTO text_table_by_id (id, test_text) VALUES (3, 'test_text_3');
+
+INSERT INTO text_table_by_maker (text_maker, id) VALUES ('maker_1', 1);
+INSERT INTO text_table_by_maker (text_maker, id) VALUES ('maker_2', 2);
+INSERT INTO text_table_by_maker (text_maker, id) VALUES ('maker_1', 3);
+
+/*
+SELECT FROM TABLES
+
+Always query data using the PRIMARY KEY or PARTITION KEY.
+Use CLUSTERING COLUMNS for ORDER BY.
+*/
+SELECT * FROM text_table_by_id;
+SELECT * FROM text_table_by_id WHERE id=1;
+
+SELECT * FROM text_table_by_maker;
+SELECT * FROM text_table_by_maker WHERE text_maker='maker_1';
+SELECT * FROM text_table_by_maker WHERE text_maker='maker_1' ORDER BY id;
