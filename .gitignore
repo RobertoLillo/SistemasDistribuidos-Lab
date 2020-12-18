@@ -1,1 +1,3 @@
+# Ignore Kafka instalation.
 Kafka/kafka
+Kafka/ProducerConsumer/data
