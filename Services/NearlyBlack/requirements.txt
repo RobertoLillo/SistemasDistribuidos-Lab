@@ -1,2 +1,0 @@
-confluent_kafka >= 1.4.2
-cassandra-driver
