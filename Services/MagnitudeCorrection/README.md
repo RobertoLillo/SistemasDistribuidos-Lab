@@ -10,4 +10,4 @@ pip3 install -r requirements.txt
 python3 MagnitudeCorrection.py
 ```
 
-Este consumirá información desde el tópico Kafka con el nombre "ztf..." e ingresará la información en el tópico "MgC - ...".
+Este consumirá información desde el tópico Kafka con el nombre "ztf - ..." e ingresará la información en el tópico "MgC - ...".
