@@ -1,0 +1,49 @@
+version: '3'
+services:
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    container_name: zookeper
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+      - APPLICATION_SECRET="random-secret"
+  cassandra:
+      image: redis
+      container_name: redis
+      ports:
+        - "6379:6379"
+      restart: always
+      volumes:
+        - ./scripts:/scripts
+  
+  cassandra:
+      image: cassandra:4.0
+      container_name: cassandra
+      ports:
+        - "9042:9042"
+      restart: always
+      volumes:
+        - ./scripts:/scripts
+
+  cassandra-load-keyspace:
+      container_name: cassandra-load-keyspace
+      image: cassandra:4.0
+      depends_on:
+        - cassandra
+      volumes:
+        - ./scripts:/scripts
+      command: /bin/bash -c "sleep 60 && echo loading cassandra keyspace && cqlsh -f /scripts/cassandra-setup.cql cassandra "
+
+  kafka:
+    ports:
+      - "9092:9092"
+    image: 'bitnami/kafka:latest'
+    container_name: kafka
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - JMX_PORT=1099
+      - KAFKA_BROKER_ID=1
+      - KAFKA_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
+    depends_on:
+      - zookeeper
