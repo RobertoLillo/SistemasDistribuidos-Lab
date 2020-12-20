@@ -1,3 +1,2 @@
 # Ignore Kafka instalation.
-Tech/Kafka/kafka
-Tech/Kafka/ProducerConsumer/data
+Services/GetZTF/data
