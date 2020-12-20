@@ -17,7 +17,6 @@ CONSUMER_CONFIG = {
 
 def list_topics(c: Consumer, filter_by="MgC-"):
     topics = c.list_topics().topics.keys()
-    print(topics)
     return list(filter(lambda x: filter_by in x, list(topics)))[-1]
 
 
