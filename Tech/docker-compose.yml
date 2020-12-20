@@ -6,7 +6,8 @@ services:
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
       - APPLICATION_SECRET="random-secret"
-  cassandra:
+
+  redis:
       image: redis
       container_name: redis
       ports:
