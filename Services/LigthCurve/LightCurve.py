@@ -30,7 +30,6 @@ if __name__ == "__main__":
     # Kafka things
     consumer = Consumer(CONSUMER_CONFIG)
     last_topic = list_topics(consumer)
-    print(last_topic)
     logging.info(f"Subscribed to {last_topic}")
     consumer.subscribe([last_topic])
 

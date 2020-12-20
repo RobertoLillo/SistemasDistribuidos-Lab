@@ -60,7 +60,7 @@ if __name__ == "__main__":
             logging.info(f"Consuming {msg.value().decode(encoding='UTF-8')}")
 
             # Post data to new topic called MgC
-            real_msg = msg.value().decode(encoding='UTF-8')
+            real_msg = msg.value().decode(encoding='UTF-8') + "Correction"
             to_stream_tar(real_msg, producer, topic_name)
 
         else:
