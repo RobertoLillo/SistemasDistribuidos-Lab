@@ -56,3 +56,10 @@ SELECT * FROM text_table_by_id WHERE id=1;
 SELECT * FROM text_table_by_maker;
 SELECT * FROM text_table_by_maker WHERE text_maker='maker_1';
 SELECT * FROM text_table_by_maker WHERE text_maker='maker_1' ORDER BY uid;
+
+----------------------------------------------------------------------------
+
+CREATE KEYSPACE IF NOT EXISTS astro_keyspace WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'};
+
+CREATE TABLE IF NOT EXISTS nearly_black (id text PRIMARY KEY, jd float, date date);
+CREATE TABLE IF NOT EXISTS statistics (id text PRIMARY KEY, jd float, date date)

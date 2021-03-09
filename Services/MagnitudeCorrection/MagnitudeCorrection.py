@@ -1,5 +1,7 @@
 from confluent_kafka import admin, Producer, Consumer
+import fastavro
 import logging
+import json
 import time 
 import io
 
@@ -8,13 +10,19 @@ logging.basicConfig(level=logging.INFO,
                     datefmt='%Y-%m-%d %H:%M:%S')
 
 
-def list_topics(c: Consumer, filter_by="ZTF-"):
+def list_topics(c: Consumer, filter_by="ztf"):
     topics = c.list_topics().topics.keys()
     return list(filter(lambda x: filter_by in x, list(topics)))[-1]
 
 
+def get_message(message):
+    bytes_io = io.BytesIO(message.value())
+    reader = fastavro.reader(bytes_io)
+    return reader.next()
+
+
 def to_stream_dir(kafka_client):
-    topic_name = "MgC-Topic1"
+    topic_name = "MgC-Topic"
     new_topic = admin.NewTopic(topic_name, 1, 1)
     kafka_client.create_topics([new_topic])
     logging.info(f"Creating topic {topic_name}")
@@ -23,7 +31,6 @@ def to_stream_dir(kafka_client):
 
 def to_stream_tar(msg, producer, topic_name):
     try:
-        logging.info(f"Producing {msg}")
         time.sleep(5)
         producer.produce(topic_name, value=bytes(msg, "utf-8"))
         producer.flush()
@@ -56,12 +63,13 @@ if __name__ == "__main__":
     while True:
         msg = consumer.poll(timeout=10)  # Previously=120
         if msg:
+            data = get_message(msg)
+            logging.info(f"Consuming {data['objectId']} - {data['candidate']['jd']}")
+            new_msg = "{}_{}".format(data['objectId'], data['candidate']['jd'])
             # Do something with data
-            logging.info(f"Consuming {msg.value().decode(encoding='UTF-8')}")
 
             # Post data to new topic called MgC
-            real_msg = msg.value().decode(encoding='UTF-8') + "Correction"
-            to_stream_tar(real_msg, producer, topic_name)
+            to_stream_tar(new_msg, producer, topic_name)
 
         else:
             last_topic = list_topics(consumer)

@@ -24,7 +24,7 @@ if __name__ == "__main__":
     # Cassandra things
     cluster = Cluster(contact_points=['127.0.0.1'], port=9042, protocol_version=4,
                     load_balancing_policy=DCAwareRoundRobinPolicy(local_dc='datacenter1'))
-    session = cluster.connect('test_keyspace')
+    session = cluster.connect('astro_keyspace')
 
     # Kafka things
     consumer = Consumer(CONSUMER_CONFIG)
@@ -36,12 +36,15 @@ if __name__ == "__main__":
         msg = consumer.poll(timeout=10)  # Previously=120
         if msg:
             # data = get_message(msg)
-            logging.info(f"Consuming {msg.value().decode(encoding='UTF-8')}")
+            dec_msg = msg.value().decode(encoding='UTF-8')
+            logging.info(f"Consuming {dec_msg}")
 
-            # Do something with data
+            data = dec_msg.split("_")
+            id = data[0]
+            jd = float(data[1])
+
             # Sending data to Cassandra database
-            session.execute("INSERT INTO light_curve_by_id (uid, test_text) VALUES (uuid(), %s)",
-                            (msg.value().decode(encoding='UTF-8'), ))
+            session.execute("INSERT INTO statistics (id, jd, date) VALUES (%s, %s, todate(now()))", [id, jd])
 
         else:
             last_topic = list_topics(consumer)
