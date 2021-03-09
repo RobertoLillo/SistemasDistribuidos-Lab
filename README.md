@@ -39,3 +39,17 @@ En este caso el Pipeline contiene **dos** Tópicos :
 De esta forma el Pipeline queda: 
 
 ![pipeline](images/Pipeline.png)
+
+
+Estos tópicos estan administrados por kafka mientras que cada modulo (ya sea productor o consumidor) están realizados en el lengauje **Python**.
+
+Cabe destacar que de este pipeline, no fue realizado el modulo de *analisis estadistico* debido a que require un nivel de procesamiento mayor en el pipeline y datos que no en todos las observaciones está presente. 
+
+### Arquitectura de Pipeline
+
+El proyecto posee la siguiente arquitectura utilizando el soporte de **Google Cloud** y **Firebase**
+![pipeline](images/arquitectura.png)
+
+
+
+
