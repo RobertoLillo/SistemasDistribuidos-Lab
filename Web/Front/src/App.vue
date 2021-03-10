@@ -20,21 +20,18 @@
 
       <v-spacer></v-spacer>
       <v-btn text :dark="scrollPosition == 0" class="mx-3" @click="$vuetify.goTo('#' + 'Last', options)" > ultimo día </v-btn>
-      <v-btn text :dark="scrollPosition == 0" class="mx-3" @click="$vuetify.goTo('#' + 'Data', options)"> Datos guardados </v-btn>
       <v-divider vertical :dark="scrollPosition == 0" inset></v-divider>
       <v-btn text :dark="scrollPosition == 0" class="mx-3" @click="$vuetify.goTo('#' + 'Home', options)"> Inicio </v-btn>
     </v-app-bar>
     <Home id="Home"></Home>
     <Last id="Last"></Last>
-    <v-divider class="mx-7"></v-divider>
-    <Data id="Data"></Data>
   </v-app>
 </template>
 
 <script>
 import Home from "./views/Home";
 import Last from "./views/LastDay";
-import Data from "./views/Data";
+
 export default {
   name: "App",
 
@@ -66,7 +63,6 @@ export default {
   components: {
     Home,
     Last,
-    Data,
   },
 };
 </script>

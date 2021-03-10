@@ -55,6 +55,8 @@
                 <v-btn
                   class="mx-3"
                   color="#0a0756"
+                  elevation="8"
+                  large
                   dark
                   rounded
                   @click="
@@ -63,9 +65,7 @@
                 >
                   Ultimo día
                 </v-btn>
-                <v-btn rounded class="mx-3" @click="
-                    $vuetify.goTo('#' + 'Data', { duration: 1000, offset: -50 })
-                  "> Datos historicos </v-btn>
+          
               </v-row>
             </v-col>
           </v-row>
