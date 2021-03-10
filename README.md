@@ -51,5 +51,11 @@ El proyecto posee la siguiente arquitectura utilizando el soporte de **Google Cl
 ![pipeline](images/arquitectura.png)
 
 
+De esta forma el proyecto se encuentra disponible en [distribuidos2-2020-lab.web.app](https://distribuidos2-2020-lab.web.app/)
+
+![fontr](images/front.png)
+
+
+
 
 
