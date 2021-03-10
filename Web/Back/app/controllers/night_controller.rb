@@ -13,7 +13,9 @@ class NightController < ApplicationController
   end
 
   def historical_s
-    statistics = @cassandra[:statistics]
+    statistics = @cassandra[:statistics].to_json
+
+    render json: statistics, status: :ok
   end
 
   def cassandra_connect

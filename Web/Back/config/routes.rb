@@ -3,8 +3,8 @@
 Rails.application.routes.draw do
   resources :night do
     member do
-      get :last
-      get :historical
+      get :historical_nb
+      get :historical_s
     end
   end
 end
