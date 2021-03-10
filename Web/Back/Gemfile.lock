@@ -66,6 +66,11 @@ GEM
       rake
       simple_uuid (~> 0.3)
       thrift_client (~> 0.7, < 0.9)
+    cassandra-driver (3.2.5)
+      ione (~> 1.2)
+    cequel (3.2.1)
+      activemodel (>= 4.0)
+      cassandra-driver (~> 3.0)
     concurrent-ruby (1.1.8)
     crass (1.0.6)
     erubi (1.10.0)
@@ -74,6 +79,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
+    ione (1.2.4)
     json (2.3.0)
     listen (3.4.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -188,6 +194,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   cassandra
+  cequel
   listen (~> 3.2)
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
