@@ -4,6 +4,8 @@
 # - Redis to get the last night information.
 # - Cassandra to get the historical nights infomarmation.
 class NightController < ApplicationController
+  before_action :cassandra_connect
+
   def last; end
 
   def historical; end
@@ -11,4 +13,8 @@ class NightController < ApplicationController
   def last_payload; end
 
   def historical_payload; end
+
+  def cassandra_connect
+    Util::CassandraConnector.get
+  end
 end
