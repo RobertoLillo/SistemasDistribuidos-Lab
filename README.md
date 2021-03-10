@@ -55,6 +55,29 @@ De esta forma el proyecto se encuentra disponible en [distribuidos2-2020-lab.web
 
 ![fontr](images/front.png)
 
+Datos obtenidos:
+
+![fontr](images/front-2.png)
+
+
+## Analisis
+
+- El enfoque del pipeline es disponibilizar los ultimos datos de forma rápida, pero guardando datos historicos
+
+- En Pipeline posee un cuello de botella o una zona critica en donde el stream de datos es relentizado por el calculo de correción:
+
+![cuello](images/cuello.png)
+
+
+- El uso de redis para la consulta del ultimo día resulto con gran exito obteniendo el filtro de valores de cassandra y guardandolos en redis de forma temporal.
+
+- Los productores y consumidores de momento solo trabajan 1 a 1, sin embargo esto se puede mejorar añadiendo más instancia de docker a cada parte del pipeline y administrando el `group.id` de Kafka mediante Zookeper.
+
+- El diseño del pipeline resulta robusto para obtener un stream de datos y puede ser utilizado en cualquier contexto que necesite un preprocesamiento de datos.
+
+- Si bien está enfocado a que existan un stream constante, esto no es del todo correcto ya que el ZTF sube un archivo comprimido al dia por lo que el resto de las horas, el pipeline se encuentra sin uso por lo que existe un malgasto de recursos durante estos periodos.
+
+![recursos](images/recursos.png)
 
 
 
