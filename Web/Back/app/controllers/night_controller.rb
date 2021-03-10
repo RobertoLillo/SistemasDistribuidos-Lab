@@ -6,15 +6,17 @@
 class NightController < ApplicationController
   before_action :cassandra_connect
 
-  def last; end
+  def historical_nb
+    nearly_black = @cassandra[:nearly_black].to_json
 
-  def historical; end
+    render json: nearly_black, status: :ok
+  end
 
-  def last_payload; end
-
-  def historical_payload; end
+  def historical_s
+    statistics = @cassandra[:statistics]
+  end
 
   def cassandra_connect
-    Util::CassandraConnector.get
+    @cassandra = Util::CassandraConnector.get
   end
 end
